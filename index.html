@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>愛犬と泊まる｜グランドーム神戸天空</title>
+<!--
+  ワンちゃん特化LP モックアップ（2026-05-29 / v5 実写組み込み版）
+  デザイン基準: https://kobetenku.com/glampdome/kobetenku-dayglamping/ の .daytrip-bbq-lp を踏襲
+  写真: 五條さん撮影（グランピング写真_五條さん撮影分）から lp-assets/dog/ にWeb最適化して使用
+    使用: dog-walk/dog-grass/dog-bed/dog-cage/dog-bowls/dog-swing/dog-bath/dog-bath2/meal/room/garden/arrival/morning
+  「撮影待ち」キャプションのプレースホルダー= まだ実写がないスロット（大型犬/備品実物/エアコン/夕方ラン/ウェルカムボード）。
+    → 対応撮影リスト: 2026-05-29_ワンちゃんLP_撮影・素材リスト.md
+  TODO(要差し替え): 大型犬・多頭の実写 / 備品実物カット / 宿泊料金の実額 / プール / 口コミ実データ
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru:wght@400;500&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:#fff}
+  .tenku-dog-lp{
+    --text:#4d4a48;--heading:#5d7a70;--brand:#997039;--brand-soft:#f3ecdf;
+    --mint:#edf8f3;--cream:#fffaf2;--pale:#feffe4;--line:#e7e0d8;
+    --shadow:0 14px 40px rgba(73,92,83,.10);--cta1:#FFD700;--cta2:#FFA500;--radius:5px;
+    color:var(--text);font-family:"Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP",sans-serif;
+    line-height:1.85;letter-spacing:.03em;-webkit-font-smoothing:antialiased;
+  }
+  .tenku-dog-lp *,.tenku-dog-lp *::before,.tenku-dog-lp *::after{box-sizing:border-box}
+  .tenku-dog-lp img{max-width:100%;height:auto;display:block}
+  .tenku-dog-lp a{color:inherit;text-decoration:none}
+  .tenku-dog-lp .container{width:min(1120px,calc(100% - 32px));margin:0 auto}
+  .tenku-dog-lp .narrow{max-width:820px;margin-left:auto;margin-right:auto}
+  .tenku-dog-lp .center{text-align:center}
+  .sp{display:none}@media(max-width:768px){.sp{display:inline}}
+  .subttl-en{color:var(--brand);font-size:13px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;margin-bottom:10px}
+  .dog-lp h2{font-size:clamp(1.7rem,3.6vw,2.3rem);font-weight:900;color:var(--heading);line-height:1.45;margin-bottom:14px}
+  .lead{font-size:1.0rem;line-height:1.9}
+  .sec{padding:84px 10px}
+  .sec--mint{background:linear-gradient(180deg,#edf8f3 0%,#f8fcfa 100%)}
+  .sec--cream{background:linear-gradient(180deg,#fffaf2 0%,#fffdf9 100%)}
+  .sec--white{background:#fff}
+  .sec--pale{background:#feffe4}
+
+  /* photo box: real <img> fills; gradient class = placeholder bg */
+  .imgph{position:relative;border-radius:var(--radius);overflow:hidden;display:flex;align-items:flex-end;box-shadow:var(--shadow)}
+  .imgph>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+  .imgph::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,25,18,.0),rgba(20,25,18,.30));z-index:1}
+  .imgph .cap{position:relative;z-index:2;margin:10px;padding:5px 10px;background:rgba(28,34,25,.6);backdrop-filter:blur(3px);color:#f3eee0;font-size:.68rem;border-radius:4px;display:inline-flex;gap:7px;align-items:flex-start;line-height:1.45}
+  .imgph .cap::before{content:"";width:6px;height:6px;border-radius:50%;background:#d8c194;flex:0 0 auto;margin-top:5px}
+  .imgph.todo .cap{background:rgba(120,70,30,.72)}
+  .imgph.todo .cap::before{background:#ffcf8a}
+  .g-run{background:linear-gradient(150deg,#43513c,#6d7652 70%,#9aa07a)}
+  .g-bed{background:linear-gradient(150deg,#6c6a5e,#9a8f78 65%,#c2b59a)}
+  .g-amenity{background:linear-gradient(150deg,#6f7669,#9aa08c 60%,#c2c4ad)}
+  .g-cool{background:linear-gradient(150deg,#3c4f50,#5d7a78 60%,#8fb0a8)}
+  .g-board{background:linear-gradient(150deg,#73684a,#9a7f55 60%,#b98b58)}
+
+  /* hero */
+  .dog-hero{position:relative}
+  .dog-hero__img{width:100%;height:clamp(340px,54vw,580px);position:relative;display:flex;align-items:flex-end;overflow:hidden}
+  .dog-hero__img>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 40%;z-index:0}
+  .dog-hero__img::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(34,40,30,.18),rgba(34,40,30,.5));z-index:1}
+  .dog-hero__box{position:absolute;inset:0;z-index:3;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:#fff;padding:0 20px}
+  .dog-hero__en{font-size:.8rem;letter-spacing:.3em;font-weight:700;margin-bottom:14px;text-shadow:0 2px 10px rgba(0,0,0,.5)}
+  .dog-hero__title{font-family:"Kiwi Maru","Noto Sans JP",serif;font-size:clamp(2rem,5vw,3.2rem);font-weight:500;line-height:1.4;text-shadow:0 4px 18px rgba(0,0,0,.45)}
+  .dog-hero__sub{margin-top:16px;font-size:clamp(.95rem,2vw,1.15rem);font-weight:500;text-shadow:0 2px 12px rgba(0,0,0,.5)}
+
+  .evidence{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:30px}
+  .evidence .imgph{height:230px}
+  @media(max-width:780px){.evidence{grid-template-columns:repeat(2,1fr)}.evidence .imgph{height:180px}}
+  .chips{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:30px 0 0}
+  .chip{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);padding:9px 16px;border-radius:999px;font-size:.85rem;font-weight:700;color:var(--brand);box-shadow:var(--shadow)}
+  .chip svg{width:15px;height:15px;color:var(--brand)}
+  .dogmark{width:64px;height:64px;margin:0 auto 14px;border-radius:50%;border:1px solid var(--brand);display:grid;place-items:center;color:var(--brand)}
+  .dogmark svg{width:32px;height:32px}
+  .ft-brand{color:var(--brand);font-weight:700}
+  .cta-button{display:inline-block;background:linear-gradient(45deg,var(--cta1),var(--cta2));color:#333;padding:18px 46px;border-radius:50px;font-size:1.15rem;font-weight:700;box-shadow:0 10px 26px rgba(0,0,0,.22);transition:transform .3s,box-shadow .3s}
+  .cta-button:hover{transform:translateY(-3px);box-shadow:0 16px 34px rgba(0,0,0,.28)}
+  .cta-note{font-size:.85rem;color:var(--brand);font-weight:700;margin-bottom:14px}
+
+  .grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+  .grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
+  @media(max-width:820px){.grid2,.grid3{grid-template-columns:1fr}}
+  .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+  .card .imgph{height:168px;border-radius:0;box-shadow:none}
+  .card__b{padding:22px 24px 26px;position:relative}
+  .card .badge{position:absolute;top:-26px;left:24px;display:grid;place-items:center;width:48px;height:48px;border-radius:50%;background:#fff;border:1px solid var(--brand);color:var(--brand);font-weight:700;font-size:1.2rem;box-shadow:var(--shadow)}
+  .card h3{font-size:1.2rem;margin:14px 0 8px;color:var(--brand)}
+  .card p{font-size:.95rem}
+
+  .qa{background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+  .qa .imgph{height:170px;border-radius:0;box-shadow:none}
+  .qa__b{padding:24px 26px}
+  .qa .q{display:flex;gap:11px;align-items:flex-start;margin-bottom:11px}
+  .qa .qm{width:28px;height:28px;flex:0 0 auto;border-radius:50%;background:var(--heading);color:#fff;font-weight:700;display:grid;place-items:center;font-size:.95rem;line-height:1}
+  .qa .qt{font-weight:700;color:var(--heading);padding-top:2px}
+  .qa .a{font-size:.95rem;padding-left:39px}
+  .qa .a strong{color:var(--brand);font-weight:700}
+
+  .spec{width:100%;max-width:760px;margin:0 auto;border-collapse:separate;border-spacing:0;background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+  .spec th,.spec td{padding:18px 22px;border-bottom:1px solid var(--line);font-size:.95rem;text-align:left;vertical-align:top}
+  .spec tr:last-child th,.spec tr:last-child td{border-bottom:0}
+  .spec th{background:var(--mint);color:var(--heading);font-weight:700;width:34%}
+  .spec td strong{color:var(--brand)}
+  .spec .free{display:inline-block;background:var(--heading);color:#fff;font-weight:700;font-size:.82rem;padding:2px 12px;border-radius:4px}
+  @media(max-width:620px){.spec th,.spec td{display:block;width:100%}.spec th{border-bottom:0}}
+
+  .amens{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:38px}
+  @media(max-width:820px){.amens{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:520px){.amens{grid-template-columns:1fr}}
+  .amen{background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+  .amen .imgph{height:178px;border-radius:0;box-shadow:none}
+  .amen__b{padding:18px 20px 20px}
+  .amen__b h3{font-size:1.05rem;color:var(--brand);margin-bottom:5px}
+  .amen__b p{font-size:.88rem}
+  .tag-ok{display:inline-block;margin-top:10px;background:var(--heading);color:#fff;font-size:.74rem;font-weight:700;padding:2px 11px;border-radius:4px}
+  .bring-row{max-width:760px;margin:26px auto 0;background:var(--brand-soft);border-radius:var(--radius);padding:20px 24px;font-size:.9rem}
+  .bring-row strong{color:var(--brand)}
+
+  .photos3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:0 0 36px}
+  .photos3 .imgph{height:200px}
+  @media(max-width:780px){.photos3{grid-template-columns:1fr}}
+
+  .tl{list-style:none;max-width:900px;margin:0 auto;position:relative}
+  .tl::before{content:"";position:absolute;left:92px;top:8px;bottom:8px;width:2px;background:#8ce0b6}
+  .tl li{position:relative;display:grid;grid-template-columns:80px 1fr;gap:24px;align-items:start;margin-bottom:8px}
+  .tl li::after{content:"";position:absolute;left:85px;top:26px;width:15px;height:15px;border-radius:50%;background:var(--heading);box-shadow:0 0 0 7px rgba(93,122,112,.14)}
+  .tl .t{text-align:right;padding-top:22px;color:var(--heading);font-weight:700;font-size:.92rem}
+  .tl .b{padding:18px 0;display:grid;grid-template-columns:1fr 250px;gap:22px;align-items:center}
+  .tl .b h3{font-size:1.1rem;color:var(--brand);margin-bottom:4px}
+  .tl .b p{font-size:.92rem}
+  .tl .b .imgph{height:150px}
+  @media(max-width:760px){.tl .b{grid-template-columns:1fr}}
+  @media(max-width:600px){.tl::before{left:16px}.tl li{grid-template-columns:1fr;gap:8px;padding-left:36px}.tl li::after{left:9px}.tl .t{text-align:left;padding-top:0}}
+
+  .voices{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  @media(max-width:780px){.voices{grid-template-columns:1fr}}
+  .voice{background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:24px}
+  .voice .qm{font-family:Georgia,serif;font-size:2.4rem;color:var(--brand);opacity:.5;line-height:.7}
+  .voice p{font-size:.92rem;margin:8px 0 14px}
+  .voice .who{font-size:.8rem;color:var(--heading);font-weight:700}
+  .photos4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:24px}
+  @media(max-width:780px){.photos4{grid-template-columns:repeat(2,1fr)}}
+  .photos4 .imgph{height:190px}
+
+  .faq{max-width:860px;margin:0 auto;display:grid;gap:14px}
+  .faq details{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+  .faq summary{position:relative;display:block;cursor:pointer;padding:20px 56px 20px 24px;font-weight:700;color:var(--heading)}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary::after{content:"+";position:absolute;right:22px;top:50%;transform:translateY(-50%);color:var(--brand);font-size:26px;font-weight:500}
+  .faq details[open] summary::after{content:"−"}
+  .faq details>div{padding:0 24px 22px;font-size:.94rem;color:#6a6662}
+
+  .note{font-size:.82rem;color:var(--text);opacity:.8;margin-top:14px}
+  .rv{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
+  .rv.in{opacity:1;transform:none}
+  @media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div class="tenku-dog-lp dog-lp">
+
+<svg style="display:none">
+  <symbol id="paw" viewBox="0 0 24 24" fill="currentColor">
+    <ellipse cx="6" cy="9.5" rx="2" ry="2.6"/><ellipse cx="12" cy="7" rx="2.1" ry="2.8"/>
+    <ellipse cx="18" cy="9.5" rx="2" ry="2.6"/><path d="M12 11c-3 0-5.4 2.2-5.4 4.7C6.6 18 8.7 19 12 19s5.4-1 5.4-3.3C17.4 13.2 15 11 12 11z"/>
+  </symbol>
+</svg>
+
+<!-- HERO -->
+<section class="dog-hero">
+  <div class="dog-hero__img"><img src="lp-assets/dog/dog-walk.jpg" alt="愛犬と神戸の眺望を望むグランピング"></div>
+  <div class="dog-hero__box">
+    <div class="dog-hero__en">GRAND DOME KOBE TENKU &mdash; with Dog</div>
+    <h1 class="dog-hero__title">愛犬と、泊まる。</h1>
+    <p class="dog-hero__sub">大型犬も、多頭も、シニアも。<br>神戸の森の、安心ドッグ専用グランピング。</p>
+  </div>
+</section>
+
+<!-- FV EVIDENCE -->
+<section class="sec sec--white" style="padding-top:50px">
+  <div class="container">
+    <p class="center rv" style="font-weight:700;color:var(--heading);font-size:1.1rem;margin-bottom:6px">写真でわかる、4つの安心。</p>
+    <div class="evidence rv">
+      <div class="imgph"><img src="lp-assets/dog/dog-grass.jpg" alt="芝生でのびのび過ごす愛犬"><span class="cap">ドッグランでのびのび</span></div>
+      <div class="imgph"><img src="lp-assets/dog/dog-bed.jpg" alt="ベッドで眠る愛犬"><span class="cap">同じベッドで、一緒に</span></div>
+      <div class="imgph"><img src="lp-assets/dog/dog-swing.jpg" alt="室内でくつろぐ愛犬"><span class="cap">お部屋でくつろぐ</span></div>
+      <div class="imgph"><img src="lp-assets/dog/dog-cage.jpg" alt="ケージでくつろぐ愛犬"><span class="cap">ケージ・備品も完備</span></div>
+    </div>
+    <div class="chips rv">
+      <span class="chip"><svg><use href="#paw"/></svg>大型犬2頭までOK</span>
+      <span class="chip"><svg><use href="#paw"/></svg>ペット追加料金 0円</span>
+      <span class="chip"><svg><use href="#paw"/></svg>各棟プライベートドッグラン</span>
+      <span class="chip"><svg><use href="#paw"/></svg>同じベッドで就寝OK</span>
+    </div>
+  </div>
+</section>
+
+<!-- INTRO -->
+<section class="sec sec--cream" style="padding-top:60px">
+  <div class="container center rv">
+    <div class="subttl-en">with Dog</div>
+    <h2>安心して泊まれる、<br class="sp">愛犬専用グランピング</h2>
+    <p class="lead narrow">
+      犬連れ旅行、ほんとうは行きたい。<br>
+      でも「大型犬だから」「他のわんちゃんが苦手だから」と、一歩が出ない——。<br>
+      神戸天空は、そんな不安をひとつずつ解いていく、<br class="sp">愛犬ファーストのグランピングです。
+    </p>
+    <div class="dogmark" style="margin-top:30px"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#paw"/></svg></div>
+    <p class="center"><span class="ft-brand" style="font-size:1.2rem">大型犬・多頭歓迎／ペット追加料金 0円</span><br>
+    大切な家族と、おうちと同じ時間を。神戸の絶景グランピングでお過ごしください。</p>
+  </div>
+</section>
+
+<!-- REASONS -->
+<section class="sec sec--mint">
+  <div class="container">
+    <div class="center rv"><div class="subttl-en">Reasons</div><h2>愛犬連れに、<br class="sp">選ばれる6つの理由</h2></div>
+    <div class="grid3" style="margin-top:42px">
+      <div class="card rv"><div class="imgph todo g-run"><span class="cap">撮影待ち｜大型犬・複数頭が一緒に過ごすカット</span></div><div class="card__b"><span class="badge">01</span><h3>大型犬・多頭もOK</h3><p>小・中型犬は3頭まで、大型犬は2頭まで。「うちの子は大きいから」をあきらめなくて大丈夫です。</p></div></div>
+      <div class="card rv"><div class="imgph"><img src="lp-assets/dog/dog-bed.jpg" alt="ベッドで眠る犬"></div><div class="card__b"><span class="badge">02</span><h3>ずっと同じお部屋で</h3><p>同じベッドで就寝OK。お食事もお風呂も、離れてさみしい時間はありません。</p></div></div>
+      <div class="card rv"><div class="imgph"><img src="lp-assets/dog/dog-walk.jpg" alt="眺望のあるドッグラン"></div><div class="card__b"><span class="badge">03</span><h3>プライベートドッグラン</h3><p>各棟に約250㎡の貸切ラン付き。他の犬が苦手な子も、気兼ねなくのびのび走れます。</p></div></div>
+      <div class="card rv"><div class="imgph"><img src="lp-assets/dog/dog-bath.jpg" alt="ひのき風呂に入る犬"></div><div class="card__b"><span class="badge">04</span><h3>愛犬専用ひのき風呂</h3><p>あの子と一緒に、檜の香りでほっとひと息。なかなか出会えない、うれしい設備です。</p></div></div>
+      <div class="card rv"><div class="imgph todo g-cool"><span class="cap">撮影待ち｜エアコンの効いた室内で涼む犬</span></div><div class="card__b"><span class="badge">05</span><h3>神戸の軽井沢で涼しく</h3><p>標高600mの森。市街地より2〜3度低く、全棟に業務用大型エアコン完備。夏も快適です。</p></div></div>
+      <div class="card rv"><div class="imgph"><img src="lp-assets/dog/dog-bowls.jpg" alt="ケージと食器など備品"></div><div class="card__b"><span class="badge">06</span><h3>手ぶらで安心の備品</h3><p>ペットシート・ペット用おむつ・ケージ・ペット用石鹸をご用意。「あれ忘れた」も大丈夫。</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- WORRIES -->
+<section class="sec sec--white">
+  <div class="container">
+    <div class="center rv"><div class="subttl-en">Q &amp; A</div><h2>犬連れの「困った」に、<br class="sp">ぜんぶお答えします</h2>
+      <p class="lead narrow">愛犬家のみなさんから実際に寄せられたお悩みに、神戸天空ができることを正直にお答えしました。</p></div>
+    <div class="grid2" style="margin-top:42px">
+      <div class="qa rv"><div class="imgph"><img src="lp-assets/dog/dog-grass.jpg" alt="芝生を走る犬"></div><div class="qa__b"><div class="q"><span class="qm">Q</span><span class="qt">大型犬や多頭で泊まれる宿が少なくて…</span></div><p class="a">小・中型犬（25kg未満）は<strong>3頭まで</strong>、大型犬（25kg以上）は<strong>2頭まで</strong>。サイズも頭数も明記しているので、当日「実は…」がありません。</p></div></div>
+      <div class="qa rv"><div class="imgph"><img src="lp-assets/dog/meal.jpg" alt="お部屋での食事"></div><div class="qa__b"><div class="q"><span class="qm">Q</span><span class="qt">食事のとき、他のワンちゃんが気になる。</span></div><p class="a">お食事は<strong>お部屋で、ご家族と愛犬だけ</strong>。食材の持ち込みもOK。隣の子に気をつかわず、ゆっくり味わえます。</p></div></div>
+      <div class="qa rv"><div class="imgph"><img src="lp-assets/dog/dog-bed.jpg" alt="ベッドで眠る犬"></div><div class="qa__b"><div class="q"><span class="qm">Q</span><span class="qt">いつも一緒に寝ているので旅先でも一緒がいい。</span></div><p class="a"><strong>同じベッドで就寝OK</strong>。ケージ派の子のために室内ケージもご用意。どちらの「いつも通り」も叶います。</p></div></div>
+      <div class="qa rv"><div class="imgph"><img src="lp-assets/dog/dog-cage.jpg" alt="ケージでくつろぐ犬"></div><div class="qa__b"><div class="q"><span class="qm">Q</span><span class="qt">トイレやマナーパンツが心配。荷物も増える。</span></div><p class="a"><strong>ペットシート・ペット用おむつを完備</strong>。お庭でのトイレもできます。手ぶらで安心です。</p></div></div>
+      <div class="qa rv"><div class="imgph"><img src="lp-assets/dog/dog-walk.jpg" alt="貸切ランで散歩"></div><div class="qa__b"><div class="q"><span class="qm">Q</span><span class="qt">他の犬が苦手で、ドッグランをためらう。</span></div><p class="a">各棟に<strong>プライベートドッグラン（約250㎡）</strong>。貸切だから他の子に会わずにのびのび。宿泊者専用の共用ランもあります。</p></div></div>
+      <div class="qa rv"><div class="imgph"><img src="lp-assets/dog/room.jpg" alt="クッション性のある室内"></div><div class="qa__b"><div class="q"><span class="qm">Q</span><span class="qt">床が滑らないか、シニアの子なので心配。</span></div><p class="a">クッション性を重視した<strong>こだわりカーペット</strong>敷き。足腰にやさしく、シニアの子も安心して歩けます。</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SPEC -->
+<section class="sec sec--cream">
+  <div class="container">
+    <div class="center rv"><div class="subttl-en">Information</div><h2>愛犬の受け入れ条件</h2>
+      <p class="lead">調べる手間をかけさせません。気になるところを、ひと目で。</p></div>
+    <table class="spec rv" style="margin-top:36px">
+      <tr><th>犬種・サイズ・頭数</th><td>小・中型犬（25kg未満）<strong>3頭まで</strong> ／ 大型犬（25kg以上）<strong>2頭まで</strong></td></tr>
+      <tr><th>ペット追加料金</th><td><span class="free">無料 / 0円</span></td></tr>
+      <tr><th>寝かた</th><td><strong>同じベッドで就寝OK</strong>（室内ケージもご用意。フロントへの移動時のみケージをお願いします）</td></tr>
+      <tr><th>お食事</th><td>人のお食事は<strong>お部屋食・食材持ち込みOK</strong>。わんちゃんのごはんは現在ご持参をお願いしています。</td></tr>
+      <tr><th>ご同伴の条件</th><td>狂犬病予防接種注射済証＋混合ワクチン予防接種証明書（1年以内・コピー可）のご提示と、同意書のご記入をお願いします。</td></tr>
+      <tr><th>チェックイン / アウト</th><td>IN 15:00 ／ OUT 11:00（ゆったりレイトチェックアウト）</td></tr>
+      <tr><th>アクセス</th><td>神戸三宮から車で約20分・大阪市内から約50分。トンネルを抜けてすぐの平坦な道で、車に酔いやすい子も安心。</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- AMENITIES -->
+<section class="sec sec--white">
+  <div class="container">
+    <div class="center rv"><div class="subttl-en">Amenities</div><h2>ご用意しているペット備品</h2>
+      <p class="lead narrow">「これ、持っていかなきゃ」を減らすために。お部屋にご用意しているものを、ぜんぶお見せします。</p></div>
+    <div class="amens">
+      <div class="amen rv"><div class="imgph todo g-amenity"><span class="cap">撮影待ち｜ペットシート（実物）</span></div><div class="amen__b"><h3>ペットシート</h3><p>お部屋・ケージまわりに。粗相が心配な子も安心です。</p><span class="tag-ok">ご用意あり</span></div></div>
+      <div class="amen rv"><div class="imgph todo g-amenity"><span class="cap">撮影待ち｜ペット用おむつ（サイズ感）</span></div><div class="amen__b"><h3>ペット用おむつ</h3><p>マナーパンツ代わりに。買い忘れ・使い切りの不安を解消。</p><span class="tag-ok">ご用意あり</span></div></div>
+      <div class="amen rv"><div class="imgph"><img src="lp-assets/dog/dog-cage.jpg" alt="室内のケージ"></div><div class="amen__b"><h3>ケージ</h3><p>ケージ派の子もいつも通り。お部屋に設置済みです。</p><span class="tag-ok">ご用意あり</span></div></div>
+      <div class="amen rv"><div class="imgph todo g-amenity"><span class="cap">撮影待ち｜ペット用石鹸（洗い場と）</span></div><div class="amen__b"><h3>ペット用石鹸</h3><p>お散歩や水あそびのあとも、さっぱり清潔に。</p><span class="tag-ok">ご用意あり</span></div></div>
+      <div class="amen rv"><div class="imgph"><img src="lp-assets/dog/dog-bath.jpg" alt="ひのき風呂の犬"></div><div class="amen__b"><h3>愛犬専用ひのき風呂</h3><p>あの子と一緒に、檜の香りで。ここだけの体験です。</p><span class="tag-ok">ご用意あり</span></div></div>
+      <div class="amen rv"><div class="imgph"><img src="lp-assets/dog/dog-grass.jpg" alt="プライベートドッグラン"></div><div class="amen__b"><h3>プライベートドッグラン</h3><p>各棟に貸切ラン付き。他の子に会わずにのびのび。</p><span class="tag-ok">ご用意あり</span></div></div>
+    </div>
+    <div class="bring-row rv center">
+      <strong>ご持参のお願い：</strong>わんちゃんのお食事 ／ 狂犬病・混合ワクチン接種証明書（1年以内・コピー可）と同意書 ／ 普段お使いのトイレ用品（あれば）
+    </div>
+  </div>
+</section>
+
+<!-- SUMMER -->
+<section class="sec sec--pale">
+  <div class="container">
+    <div class="center rv"><div class="subttl-en">Summer</div><h2>「夏はあきらめてた」を、<br class="sp">ひっくり返す</h2>
+      <p class="lead narrow">愛犬家の6割が「夏は暑いから出かけない」。でも、涼しく過ごせる場所さえあれば——という声が、いちばん多く届きました。神戸天空の夏は、ここが違います。</p></div>
+    <div class="photos3 rv" style="margin-top:38px">
+      <div class="imgph todo g-cool"><span class="cap">撮影待ち｜業務用大型エアコンと涼む犬</span></div>
+      <div class="imgph"><img src="lp-assets/dog/room.jpg" alt="涼しい室内"><span class="cap">涼しい室内でくつろぐ</span></div>
+      <div class="imgph"><img src="lp-assets/dog/dog-walk.jpg" alt="夕方の涼しい時間のラン"><span class="cap">朝夕は貸切ランで</span></div>
+    </div>
+    <div class="grid2 narrow">
+      <div class="qa rv"><div class="qa__b"><h3 style="color:var(--brand);margin-bottom:6px">標高600m、神戸の軽井沢</h3><p style="font-size:.95rem">市街地より2〜3度低く、森の風が抜ける。それだけで、夏のおでかけのハードルが下がります。</p></div></div>
+      <div class="qa rv"><div class="qa__b"><h3 style="color:var(--brand);margin-bottom:6px">全棟、業務用大型エアコン完備</h3><p style="font-size:.95rem">暑さに弱い子も、室内はいつでもひんやり快適。お留守番ではなく、一緒に涼めます。</p></div></div>
+      <div class="qa rv"><div class="qa__b"><h3 style="color:var(--brand);margin-bottom:6px">早朝・夕方は貸切ドッグランで</h3><p style="font-size:.95rem">日差しのやわらぐ時間に、プライベートランでひと遊び。他の子を気にせず思いきり走れます。</p></div></div>
+      <div class="qa rv"><div class="qa__b"><h3 style="color:var(--brand);margin-bottom:6px">水あそびプール（導入予定）</h3><p style="font-size:.95rem">夏のいちばんの楽しみを、いま準備中。詳細が決まりしだいお知らせします。</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="sec sec--mint">
+  <div class="container">
+    <div class="center rv"><div class="subttl-en">How to Spend</div><h2>到着から朝まで、<br class="sp">愛犬と過ごす一日</h2></div>
+    <ol class="tl" style="margin-top:40px">
+      <li class="rv"><div class="t">15:00</div><div class="b"><div><h3>チェックイン、そしてお庭へ</h3><p>フロントでご挨拶。ひろびろしたお部屋と専用のお庭が、あなたと愛犬を迎えます。</p></div><div class="imgph"><img src="lp-assets/dog/arrival.jpg" alt="到着シーン"></div></div></li>
+      <li class="rv"><div class="t">15:30〜</div><div class="b"><div><h3>プライベートドッグランで、ひと遊び</h3><p>貸切だから、リードを外して思いきり。走る姿は、最高のシャッターチャンス。</p></div><div class="imgph"><img src="lp-assets/dog/dog-grass.jpg" alt="ランで遊ぶ犬"></div></div></li>
+      <li class="rv"><div class="t">18:00〜</div><div class="b"><div><h3>お部屋で、いっしょに夕食</h3><p>他の子に気をつかわず、ご家族と愛犬だけで。食材の持ち込みも歓迎です。</p></div><div class="imgph"><img src="lp-assets/dog/meal.jpg" alt="お部屋での夕食"></div></div></li>
+      <li class="rv"><div class="t">20:00〜</div><div class="b"><div><h3>愛犬専用ひのき風呂で、ほっと</h3><p>檜の香りに包まれて。雨の日は室内でゆったり、夜もたっぷり過ごせます。</p></div><div class="imgph"><img src="lp-assets/dog/dog-bath2.jpg" alt="ひのき風呂と犬"></div></div></li>
+      <li class="rv"><div class="t">翌 7:00〜</div><div class="b"><div><h3>朝ごはんと、森の朝</h3><p>鳥の声で目覚める朝。同じベッドで眠ったあの子と、ゆっくり一日をはじめましょう。</p></div><div class="imgph"><img src="lp-assets/dog/morning.jpg" alt="森の朝"></div></div></li>
+      <li class="rv"><div class="t">11:00</div><div class="b"><div><h3>のんびりレイトチェックアウト</h3><p>11時まで、急がなくて大丈夫。最後の森の時間まで、心ゆくまで。</p></div><div class="imgph"><img src="lp-assets/dog/dog-swing.jpg" alt="名残を惜しむ犬"></div></div></li>
+    </ol>
+  </div>
+</section>
+
+<!-- RECOMMEND -->
+<section class="sec sec--white">
+  <div class="container">
+    <div class="center rv"><div class="subttl-en">Recommend</div><h2>こんな方におすすめ</h2></div>
+    <div class="grid2 narrow" style="margin-top:40px">
+      <div class="qa rv"><div class="qa__b"><h3 style="color:var(--brand);margin-bottom:6px">大型犬・多頭のご家族</h3><p style="font-size:.95rem">「泊まれる宿が少ない」を、もう探さなくて大丈夫。サイズも頭数も気にせずお越しください。</p></div></div>
+      <div class="qa rv"><div class="qa__b"><h3 style="color:var(--brand);margin-bottom:6px">はじめての犬連れ旅行</h3><p style="font-size:.95rem">同室・部屋食・備品完備で、はじめてでも安心。まずは近場で、一歩を踏み出せます。</p></div></div>
+      <div class="qa rv"><div class="qa__b"><h3 style="color:var(--brand);margin-bottom:6px">他の犬が苦手な子と</h3><p style="font-size:.95rem">プライベートドッグランで、他の子に会わずにのびのび。マイペースなあの子にぴったり。</p></div></div>
+      <div class="qa rv"><div class="qa__b"><h3 style="color:var(--brand);margin-bottom:6px">子どもも犬も一緒に</h3><p style="font-size:.95rem">広いお部屋とお庭で、お子さまも愛犬も。家族みんなが楽しめる一日に。</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- VOICES -->
+<section class="sec sec--cream">
+  <div class="container">
+    <div class="center rv"><div class="subttl-en">Voices</div><h2>愛犬と過ごした、<br class="sp">みんなの神戸天空</h2>
+      <p class="lead">滞在中の一枚を、ぜひ <span class="ft-brand">#神戸天空withdog</span> で。</p></div>
+    <div class="voices" style="margin-top:38px">
+      <div class="voice rv"><div class="qm">&ldquo;</div><p>大型犬2頭でも気兼ねなく泊まれて、こんな場所を探してました。プライベートランで走る姿に泣きそうに。</p><div class="who">ゴールデン2頭と／40代</div></div>
+      <div class="voice rv"><div class="qm">&ldquo;</div><p>同じベッドで寝られたのが本当にうれしい。ひのき風呂に一緒に入れるなんて、ここだけ。</p><div class="who">トイプードルと／30代</div></div>
+      <div class="voice rv"><div class="qm">&ldquo;</div><p>夏は暑くて毎年あきらめてたけど、部屋が涼しくて快適。早朝のドッグランが最高でした。</p><div class="who">柴と／20代</div></div>
+    </div>
+    <div class="photos4 rv">
+      <div class="imgph"><img src="lp-assets/dog/dog-grass.jpg" alt="ランの愛犬"></div>
+      <div class="imgph"><img src="lp-assets/dog/garden.jpg" alt="庭・ブランコと"></div>
+      <div class="imgph"><img src="lp-assets/dog/dog-bath.jpg" alt="ひのき風呂と愛犬"></div>
+      <div class="imgph"><img src="lp-assets/dog/dog-bed.jpg" alt="ベッドで眠る愛犬"></div>
+    </div>
+    <p class="note center">※ お客様の声は仮テキストです。実際のレビューに差し替えてください。</p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec sec--white">
+  <div class="container">
+    <div class="center rv"><div class="subttl-en">FAQ</div><h2>よくあるご質問</h2></div>
+    <div class="faq" style="margin-top:38px">
+      <details class="rv"><summary>同じお部屋で、ずっと一緒に過ごせますか？</summary><div>はい。チェックインから就寝、お食事まで、お部屋で愛犬とご一緒にお過ごしいただけます。フロントへ移動される際のみ、ケージのご利用をお願いしています。</div></details>
+      <details class="rv"><summary>大型犬や多頭での宿泊はできますか？</summary><div>小・中型犬（25kg未満）は3頭まで、大型犬（25kg以上）は2頭まで承っております。ペットの追加料金はいただいておりません。</div></details>
+      <details class="rv"><summary>ワクチンの証明は必要ですか？</summary><div>狂犬病予防接種注射済証と、1年以内の混合ワクチン予防接種証明書（コピー可）のご提示をお願いしています。あわせて同意書のご記入をお願いしております。持病等でご不安がある場合は、事前にお問い合わせください。</div></details>
+      <details class="rv"><summary>トイレやマナーパンツは持参が必要ですか？</summary><div>ペットシートとペット用おむつをご用意しています。お庭でのトイレも可能です。普段お使いのものがあればご持参いただくと、より安心です。</div></details>
+      <details class="rv"><summary>わんちゃんのごはんは出ますか？</summary><div>現在、わんちゃんのお食事はご持参をお願いしています。人のお食事はお部屋食で、食材の持ち込みも可能です。</div></details>
+      <details class="rv"><summary>ドッグランは貸切ですか？他の犬が苦手でも大丈夫？</summary><div>各棟にプライベートドッグラン（約250㎡）が付いています。貸切のため、他のわんちゃんに会わずにお過ごしいただけます。宿泊者専用の共用ドッグランもございます。</div></details>
+      <details class="rv"><summary>夏は暑くないですか？</summary><div>標高600mの森にあり、神戸市街地より2〜3度ほど涼しい環境です。全棟に業務用大型エアコンを完備。日中は室内で、朝夕は貸切ランで、快適にお過ごしいただけます。</div></details>
+      <details class="rv"><summary>子どもも一緒に楽しめますか？</summary><div>はい。お子さまと愛犬、ご家族みんなでお過ごしいただけます。広いお部屋とお庭で、それぞれの時間をお楽しみください。</div></details>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="sec sec--pale">
+  <div class="container center narrow rv">
+    <div class="subttl-en">Reservation</div>
+    <h2>ご予約受付中</h2>
+    <p class="lead" style="margin-bottom:34px">あの子と、おうちの外で過ごす特別な夜。<br>空室のご確認だけでも、お気軽にどうぞ。</p>
+    <p class="cta-note">24時間オンライン受付中</p>
+    <a class="cta-button" href="#">ご予約はこちら</a>
+    <p class="note">LINE友だち追加で特典あり／ご宿泊者 入浴無料／食材・飲食の持込自由</p>
+  </div>
+</section>
+
+<!-- FINAL MESSAGE -->
+<section class="sec sec--white">
+  <div class="container center narrow rv">
+    <p class="lead">
+      標高600mの森で、<br>大切な家族みんなと過ごす、特別な一日。<br><br>
+      景色も、時間も、ごはんも、<br>きっといつもより少しやさしくなる。<br><br>
+      グランドーム神戸天空で、<br>愛犬との心に残るひとときを。
+    </p>
+  </div>
+</section>
+
+</div>
+<script>
+  const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.1,rootMargin:'0px 0px -6% 0px'});
+  document.querySelectorAll('.rv').forEach((el,i)=>{el.style.transitionDelay=(Math.min(i%3,2)*0.08)+'s';io.observe(el);});
+</script>
+</body>
+</html>
